@@ -10,7 +10,6 @@ import android.widget.Button;
 
 import com.viethoa.DialogUtils;
 
-
 public class MainActivity extends Activity {
 
     @Override
@@ -90,7 +89,8 @@ public class MainActivity extends Activity {
     }
 
     protected void BtnDownClick() {
-        DialogUtils dialogUtils = new DialogUtils(this, "dialog title", "message", new DialogUtils.DialogListener() {
+        DialogUtils dialogUtils = new DialogUtils(this, getString(R.string.dialog_title), getString(R.string.dialog_message),
+                new DialogUtils.DialogListener() {
             @Override
             public void onPositiveButton(DialogInterface dialogInterface) {
                 //Todo something you need

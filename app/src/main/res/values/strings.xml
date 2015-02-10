@@ -10,4 +10,6 @@
     <string name="hint_enter_password">Enter a Password</string>
     <string name="title_activity_log_in">Log In</string>
     <string name="title_forgot_password">Forgot Password?</string>
+    <string name="dialog_title">dialog title</string>
+    <string name="dialog_message">this is normal dialog with message</string>
 </resources>

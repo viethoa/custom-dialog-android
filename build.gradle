@@ -9,8 +9,14 @@ buildscript {
     }
 }
 
+def isReleaseBuild() {
+    return version.contains("") == false
+}
+
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/groups/public' }
     }
 }

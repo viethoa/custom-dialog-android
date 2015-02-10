@@ -19,7 +19,7 @@ public class DialogUtils extends DialogFragment {
     private String titlePositiveButton;
     private String titleNegativeButton;
     private Number layoutResourceId;
-    private String title;
+    public String dialog_title;
     private Context context;
     private String message;
 
@@ -36,7 +36,7 @@ public class DialogUtils extends DialogFragment {
     public DialogUtils(Context context, int layoutResourceId, String negativeButton, String positiveButton, String title, DialogListener callBack) {
         this.context = context;
         this.callBack = callBack;
-        this.title = title;
+        this.dialog_title = title;
         this.titlePositiveButton = positiveButton;
         this.layoutResourceId = layoutResourceId;
         this.titleNegativeButton = negativeButton;
@@ -47,7 +47,7 @@ public class DialogUtils extends DialogFragment {
 
     public DialogUtils(Context context, String title, String message, String positive, String negative, DialogListener callBack) {
         this.context = context;
-        this.title = title;
+        this.dialog_title = title;
         this.message = message;
         this.callBack = callBack;
         this.titleNegativeButton = negative;
@@ -59,7 +59,7 @@ public class DialogUtils extends DialogFragment {
 
     public DialogUtils(Context context, String title, String message, DialogListener callBack) {
         this.context = context;
-        this.title = title;
+        this.dialog_title = title;
         this.message = message;
         this.callBack = callBack;
         this.titleNegativeButton = "Cancel";
@@ -160,12 +160,8 @@ public class DialogUtils extends DialogFragment {
         }
 
         //Optional title
-        if (title != null && title.length() > 0)
-            builder.setTitle(title);
-
-        //Optional message
-        if (message != null && message.length() > 0)
-            builder.setTitle(message);
+        if (dialog_title != null && dialog_title.length() > 0)
+            builder.setTitle(dialog_title);
 
         //Optional positive button
         if (callBack != null && titlePositiveButton != null && titlePositiveButton.length() > 0)

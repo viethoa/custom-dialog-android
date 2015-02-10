@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
-    compile project(':libraries:CustomDialog')
+    compile 'com.github.viethoa:customdialogs:1.2.1-SNAPSHOT'
+    //compile project(':libraries:CustomDialog')
 }
 
