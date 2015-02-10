@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_primary_color">#FFFF5B39</color>
+    <color name="app_color_red">#FFE82E28</color>
+    <color name="app_color_green">#FF55C61C</color>
+    <color name="app_color_blue">#FF3BB6E2</color>
+
+    <color name="bg_custom_dialog">#E6ffffff</color>
+
+    <color name="text_color_black">#FF000000</color>
+    <color name="text_color_dark">#FF666666</color>
+    <color name="text_color_light">#FFBCBCBC</color>
+    <color name="text_color_bright">#FFFFFF</color>
+    <color name="text_color_gray">#FFEEEEEE</color>
+</resources>

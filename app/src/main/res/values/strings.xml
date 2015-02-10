@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CustomDialog</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</string>
+
+    <string name="hint_email_address">Email Address</string>
+    <string name="hint_enter_password">Enter a Password</string>
+    <string name="title_activity_log_in">Log In</string>
+    <string name="title_forgot_password">Forgot Password?</string>
+</resources>
