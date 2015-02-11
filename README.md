@@ -11,6 +11,8 @@ Feature
 - dialogUtils.setSlideDown() to change animate Show is slide down.
 - Set `null` for optional that you don't to use this.
 
+![](https://github.com/viethoa/CustomDialog/blob/master/hhuog.gif "DynamicListView")
+
 How to use
 -----
     repositories {
@@ -27,8 +29,6 @@ How to use
 
 1. Create normal dialog (to easily custom title divide color)
 -----
-    <image normal dialog>
-
     DialogUtils dialogUtils = new DialogUtils(this, title, message, new DialogUtils.DialogListener() {
 
         @Override
@@ -64,8 +64,6 @@ Note:
 
 2. Create Custom View Dialog (This is AlertDialog Control)
 -----
-    <image normal dialog>
-
     DialogUtils dialogUtils = new DialogUtils(this, R.layout.custom_layout, null, null, null, null);
     if (dialogUtils != null) {
         dialogUtils.show(getFragmentManager(), null);
