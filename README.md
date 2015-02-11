@@ -11,7 +11,7 @@ Feature
 - dialogUtils.setSlideDown() to change animate Show is slide down.
 - Set `null` for optional that you don't to use this.
 
-![](https://github.com/viethoa/CustomDialog/blob/master/hhuog.gif "DynamicListView")
+![](https://github.com/viethoa/image-repositories/blob/master/custom-dialog.gif "DynamicListView")
 
 How to use
 -----
@@ -71,7 +71,6 @@ Note:
 
 3. Create simple dialog (This is Dialog Control)
 -----
-
     Dialog simpleDialog = DialogUtils.createSimpleDialog(this, customView, true, false);
     if (simpleDialog != null && !simpleDialog.isShowing()) {
         simpleDialog.show();
