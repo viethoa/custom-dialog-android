@@ -4,6 +4,13 @@ CustomDialog is an Open Source Android library that allows developers to easily 
 Feel free to use it all you want in your Android apps provided that you cite this project and include the license in your app.
 Support Sdk Version 14 to nearly.
 
+Feature
+-----
+- dialogUtils.dismiss() to dismiss this.
+- dialogUtils.setCancelable() to set cancelable.
+- dialogUtils.setSlideDown() to change animate Show is slide down.
+- Set `null` for optional that you don't to use this.
+
 How to use
 -----
     repositories {
@@ -72,12 +79,6 @@ Note:
         simpleDialog.show();
     }
 
-
-Feature
------
-- dialogUtils.dismiss() to dismiss this.
-- dialogUtils.setSlideDown() to change animate Show is slide down.
-- Set `null` for optional that you don't to use this.
 
 
 
