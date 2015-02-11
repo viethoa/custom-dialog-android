@@ -80,8 +80,6 @@ public class MainActivity extends Activity {
 
     protected void BtnUpClick() {
         DialogUtils dialogUtils = new DialogUtils(this, R.layout.alert_dialog_custom_layout, null, null, null, null);
-        dialogUtils.setDivideColor(R.color.app_primary_color);
-        dialogUtils.setTitleColor(R.color.app_primary_color);
 
         if (dialogUtils != null) {
             dialogUtils.show(getFragmentManager(), null);
@@ -102,7 +100,8 @@ public class MainActivity extends Activity {
             }
         });
 
-        dialogUtils.setSlideDown();
+        dialogUtils.setSlideDown(); // Animate Show is slide down
+
         dialogUtils.setDivideColor(R.color.app_primary_color);
         dialogUtils.setTitleColor(R.color.app_primary_color);
 
