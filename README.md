@@ -89,15 +89,15 @@ How to use
 Note: 
 - You can change PositiveButton's Text and NegativeButton's Text by to like:
 
-    `DialogUtils dialogUtils = new DialogUtils(this, title, message, positiveText, neagtiveText, new DialogUtils.DialogListener()`
+    `DialogUtils.createCustomDialog(this, title, customView, negativeText, positiveText, false, new DialogUtils.DialogListener()`
 
 - If you only need a PositiveButton or NegativeButton you just make like:
 
-    `DialogUtils dialogUtils = new DialogUtils(this, title, message, positiveText, null, new DialogUtils.DialogListener()`
+    `DialogUtils.createCustomDialog(this, title, customView, null, positiveButton, false, new DialogUtils.DialogListener()`
 
     or
 
-    `DialogUtils dialogUtils = new DialogUtils(this, title, message, null, negativeText, new DialogUtils.DialogListener()`
+    `DialogUtils.createCustomDialog(this, title, customView, negativeButton, null, false, new DialogUtils.DialogListener()`
 
 
 
