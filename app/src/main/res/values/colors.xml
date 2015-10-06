@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app_primary_color">#FFFF5B39</color>
+    <color name="app_primary_color_dark">#FFE82E28</color>
     <color name="app_color_red">#FFE82E28</color>
     <color name="app_color_green">#FF55C61C</color>
     <color name="app_color_blue">#FF3BB6E2</color>
