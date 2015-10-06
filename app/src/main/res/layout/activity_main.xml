@@ -1,61 +1,24 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_dialog_message"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_margin="10px">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Dialog Message"/>
 
-        <Button
-            android:id="@+id/btnDialogUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="custom view"/>
-
-        <Button
-            android:id="@+id/btnDialogDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="dialog message"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/text_color_dark"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btn_custom_dialog"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_margin="10px">
-
-        <Button
-            android:id="@+id/btnSimpleDialogUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnDialogUp"
-            android:text="simple up"/>
-
-        <Button
-            android:id="@+id/btnSimpleDialogDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnDialogUp"
-            android:text="simple down"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/text_color_dark"/>
-
-</LinearLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_dialog_message"
+        android:layout_marginTop="20dp"
+        android:text="Custom Dialog"/>
+</RelativeLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg_cover">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adding To Favorite"/>
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/xlarge_space"
+        android:textSize="@dimen/font_medium"
+        android:textColor="@color/text_color_dark"
+        android:background="@color/dialog_bg_color"
+        android:text="my message"/>
+
+    <FrameLayout
+        android:id="@+id/dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_below="@id/tv_message"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_negative"
+            style="@style/dialog_button_negative"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textSize="@dimen/font_medium"
+            android:text="Cancel"/>
+
+        <Button
+            android:id="@+id/btn_positive"
+            style="@style/dialog_button_positive"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_medium"
+            android:visibility="visible"
+            android:text="Yes"/>
+    </LinearLayout>
+</LinearLayout>

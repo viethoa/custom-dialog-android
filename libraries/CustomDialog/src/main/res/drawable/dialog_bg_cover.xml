@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="@dimen/line_space" android:color="@color/dialog_bg_border" />
+            <solid android:color="@color/dialog_bg_color"/>
+        </shape>
+    </item>
+</selector>

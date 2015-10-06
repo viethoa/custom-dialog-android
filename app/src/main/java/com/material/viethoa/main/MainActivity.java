@@ -2,7 +2,6 @@ package com.material.viethoa.main;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,40 +16,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //--------------------------------------------------------------------------------
-        // Alert dialog
-        Button btnDialogUp = (Button) findViewById(R.id.btnDialogUp);
-        btnDialogUp.setOnClickListener(new View.OnClickListener() {
+        Button btnDialogMessage = (Button) findViewById(R.id.btn_dialog_message);
+        btnDialogMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BtnUpClick();
+                SimpleDialogMessage();
             }
         });
 
-        Button btnDialogDown = (Button) findViewById(R.id.btnDialogDown);
-        btnDialogDown.setOnClickListener(new View.OnClickListener() {
+        Button btnCustomDialog = (Button) findViewById(R.id.btn_custom_dialog);
+        btnCustomDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BtnDownClick();
-            }
-        });
-
-        //--------------------------------------------------------------------------------
-        // Dialog
-        Button btnSimpleDialogUp = (Button) findViewById(R.id.btnSimpleDialogUp);
-        btnSimpleDialogUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDialogUp();
-            }
-        });
-
-        Button btnSimpleDialogDown = (Button) findViewById(R.id.btnSimpleDialogDown);
-        btnSimpleDialogDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDialogDown();
+                DialogCustomView();
             }
         });
     }
@@ -60,53 +38,52 @@ public class MainActivity extends Activity {
     //  Event
     //--------------------------------------------------------------------------------
 
-    protected void SimpleDialogUp() {
-        View customView = LayoutInflater.from(this).inflate(R.layout.dialog_custom_layout, null);
+    protected void SimpleDialogMessage() {
+        String title = "Simple Dialog Message";
+        String message = "Here is your message can display !";
+        String negativeButton = "Cancel";
+        String positiveButton = "Ok";
+        final Dialog myDialog = DialogUtils.createDialogMessage(this, title, message,
+                negativeButton, positiveButton, false, new DialogUtils.DialogListener() {
+                    @Override
+                    public void onPositiveButton() {
 
-        Dialog simpleDialog = DialogUtils.createSimpleDialog(this, customView, true, true);
-        if (simpleDialog != null && !simpleDialog.isShowing()) {
-            simpleDialog.show();
+                    }
+
+                    @Override
+                    public void onNegativeButton() {
+
+                    }
+                });
+
+        if (myDialog != null && !myDialog.isShowing()) {
+            myDialog.show();
         }
     }
 
-    protected void SimpleDialogDown() {
-        View customView = LayoutInflater.from(this).inflate(R.layout.dialog_custom_layout, null);
+    protected void DialogCustomView() {
+        String title = "Simple Dialog Message";
+        String negativeButton = "Cancel";
+        String positiveButton = "Ok";
 
-        Dialog simpleDialog = DialogUtils.createSimpleDialog(this, customView, true, false);
-        if (simpleDialog != null && !simpleDialog.isShowing()) {
-            simpleDialog.show();
-        }
-    }
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View customView = inflater.inflate(R.layout.dialog_item_layout, null);
 
-    protected void BtnUpClick() {
-        DialogUtils dialogUtils = new DialogUtils(this, R.layout.alert_dialog_custom_layout, null, null, null, null);
+        final Dialog myDialog = DialogUtils.createCustomDialog(this, title, customView,
+                negativeButton, positiveButton, false, new DialogUtils.DialogListener() {
+                    @Override
+                    public void onPositiveButton() {
 
-        if (dialogUtils != null) {
-            dialogUtils.show(getFragmentManager(), null);
-        }
-    }
+                    }
 
-    protected void BtnDownClick() {
-        DialogUtils dialogUtils = new DialogUtils(this, getString(R.string.dialog_title), getString(R.string.dialog_message),
-                new DialogUtils.DialogListener() {
-            @Override
-            public void onPositiveButton(DialogInterface dialogInterface) {
-                //Todo something you need
-            }
+                    @Override
+                    public void onNegativeButton() {
 
-            @Override
-            public void onNegativeButton(DialogInterface dialogInterface) {
-                //Todo something you need
-            }
-        });
+                    }
+                });
 
-        dialogUtils.setSlideDown(); // Animate Show is slide down
-
-        dialogUtils.setDivideColor(R.color.app_primary_color);
-        dialogUtils.setTitleColor(R.color.app_primary_color);
-
-        if (dialogUtils != null) {
-            dialogUtils.show(getFragmentManager(), null);
+        if (myDialog != null && !myDialog.isShowing()) {
+            myDialog.show();
         }
     }
 

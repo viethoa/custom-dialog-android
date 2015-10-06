@@ -9,8 +9,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
@@ -18,11 +23,12 @@ public class DialogUtils extends DialogFragment {
 
     private String titlePositiveButton;
     private String titleNegativeButton;
-    private Number layoutResourceId;
+    private View customView;
     public String dialog_title;
     private Context context;
     private String message;
 
+    private static boolean isCenter = false;
     private static boolean isSlideUp;
     private Number titleColor;
     private Number divideColor;
@@ -31,14 +37,23 @@ public class DialogUtils extends DialogFragment {
     private DialogListener callBack;
 
     /**
+     * Dialog Callback
+     */
+    public static abstract class DialogListener {
+        public abstract void onPositiveButton();
+
+        public abstract void onNegativeButton();
+    }
+
+    /**
      * Setup dialog
      */
-    public DialogUtils(Context context, int layoutResourceId, String negativeButton, String positiveButton, String title, DialogListener callBack) {
+    public DialogUtils(Context context, View customView, String negativeButton, String positiveButton, String title, DialogListener callBack) {
         this.context = context;
         this.callBack = callBack;
         this.dialog_title = title;
+        this.customView = customView;
         this.titlePositiveButton = positiveButton;
-        this.layoutResourceId = layoutResourceId;
         this.titleNegativeButton = negativeButton;
 
         initialiseDialog();
@@ -91,8 +106,12 @@ public class DialogUtils extends DialogFragment {
     }
 
     /**
-     *  Event for user custom dialog
+     * Event for user custom dialog
      */
+    public void setCenterTitle(boolean isCenter) {
+        this.isCenter = isCenter;
+    }
+
     public void setSlideUp() {
         this.isSlideUp = true;
     }
@@ -113,10 +132,11 @@ public class DialogUtils extends DialogFragment {
         this.titleColor = color;
     }
 
+
     /**
      * Simple dialog
      */
-    public static Dialog createSimpleDialog(Activity activity, View customView, boolean cancelable, boolean isSlideUp) {
+    public static Dialog createSimpleDialog(Context activity, View customView, boolean cancelable) {
         if (activity == null || customView == null) {
             Log.d("DialogUtil", "activity or layout is null");
             return null;
@@ -126,17 +146,126 @@ public class DialogUtils extends DialogFragment {
         dialog.setContentView(customView);
         dialog.setCancelable(cancelable);
 
-        if (isSlideUp == true) {
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationSlideUp;
-        } else {
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationSlideDown;
+        return dialog;
+    }
+
+
+
+
+    /**
+     * New Simple dialog message
+     */
+    public static Dialog createCustomDialog(Context activity, String title, View customView, String cancelButton,
+                                            String doneButton, boolean cancelable, final DialogListener listener) {
+        return createDialog(activity, title, null, customView, cancelButton, doneButton, cancelable, listener);
+    }
+
+    public static Dialog createDialogMessage(Context activity, String title, String message, String cancelButton,
+                                             String doneButton, boolean cancelable, final DialogListener listener) {
+        return createDialog(activity, title, message, null, cancelButton, doneButton, cancelable, listener);
+    }
+
+    private static Dialog createDialog(Context activity, String title, String message, View customView,
+                                             String cancelButton, String doneButton, boolean cancelable,
+                                             final DialogListener listener) {
+        if (activity == null)
+            return null;
+
+        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View myCustomView = inflater.inflate(R.layout.dialog_message_layout, null);
+        TextView tvTitle = (TextView) myCustomView.findViewById(R.id.tv_title);
+        TextView tvMessage = (TextView) myCustomView.findViewById(R.id.tv_message);
+        Button btnNegative = (Button) myCustomView.findViewById(R.id.btn_negative);
+        Button btnPositive = (Button) myCustomView.findViewById(R.id.btn_positive);
+        ViewGroup dialogContent = (ViewGroup) myCustomView.findViewById(R.id.dialog_content);
+
+        final Dialog dialog = DialogUtils.createSimpleDialog(activity, myCustomView, cancelable);
+
+        //Define my dialog width
+        int width = DeviceUtils.getDeviceScreenWidth(activity) - 100;
+        ViewGroup.LayoutParams params = myCustomView.getLayoutParams();
+        params.width = width;
+        myCustomView.setLayoutParams(params);
+
+        //Title
+        if (title != null && !title.equals("")) {
+            tvTitle.setText(title);
+        }
+
+        //Message
+        boolean isDialogMessage = (message != null && !message.equals(""));
+        tvMessage.setText(isDialogMessage ? message : "");
+        tvMessage.setVisibility(isDialogMessage ? View.VISIBLE : View.GONE);
+
+        //Custom View
+        if (customView != null && !isDialogMessage) {
+            dialogContent.addView(customView);
+        }
+
+        //Negative button
+        if (cancelButton != null && !cancelButton.equals("")) {
+            btnNegative.setText(cancelButton);
+            btnNegative.setVisibility(View.VISIBLE);
+            btnNegative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    if (listener != null) {
+                        listener.onNegativeButton();
+                    }
+                }
+            });
+        }
+        //Positive button
+        if (doneButton != null && !doneButton.equals("")) {
+            btnPositive.setText(doneButton);
+            btnPositive.setVisibility(View.VISIBLE);
+            btnPositive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    if (listener != null) {
+                        listener.onPositiveButton();
+                    }
+                }
+            });
         }
 
         return dialog;
     }
 
+
+
+
     /**
-     * Custom view Dialog
+     * dummy menu dialog :D
+     */
+    public static Dialog createMenuDialog(Activity activity, View customView, int X, int Y) {
+        if (activity == null || customView == null) {
+            Log.d("DialogUtil", "activity or layout is null");
+            return null;
+        }
+
+        Dialog dummyMenuDialog = new Dialog(activity, R.style.app_setting_dialog);
+        dummyMenuDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        WindowManager.LayoutParams wmlp = dummyMenuDialog.getWindow().getAttributes();
+        wmlp.gravity = Gravity.TOP | Gravity.RIGHT;
+        wmlp.x = X;
+        wmlp.y = Y;
+
+        dummyMenuDialog.setContentView(customView);
+        dummyMenuDialog.setCancelable(true);
+
+        return dummyMenuDialog;
+    }
+
+
+    /**
+     * Setup Custom view Dialog
      */
     private AlertDialog.Builder CustomViewDialog() {
         if (builder == null) {
@@ -145,13 +274,9 @@ public class DialogUtils extends DialogFragment {
         }
 
         //Optional custom view
-        if (layoutResourceId != null) {
-            LayoutInflater inflater = getActivity().getLayoutInflater();
-            View dialogCustomView = inflater.inflate(layoutResourceId.intValue(), null);
-
-            if (dialogCustomView != null)
-                builder.setView(dialogCustomView);
-        } else if (layoutResourceId != null && message != null) {
+        if (customView != null) {
+            builder.setView(customView);
+        } else if (customView != null && message != null) {
             Log.e("DialogUtil", "message has no effect when using custom dialogView");
         }
         //Optional message
@@ -169,7 +294,7 @@ public class DialogUtils extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if (callBack != null)
-                        callBack.onPositiveButton(dialogInterface);
+                        callBack.onPositiveButton();
                 }
             });
 
@@ -179,7 +304,7 @@ public class DialogUtils extends DialogFragment {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     if (callBack != null)
-                        callBack.onNegativeButton(dialogInterface);
+                        callBack.onNegativeButton();
                 }
             });
 
@@ -196,21 +321,21 @@ public class DialogUtils extends DialogFragment {
     }
 
     /**
-     *  Custom animation show
+     * Custom animation show
      */
     @Override
     public void onActivityCreated(Bundle arg0) {
         super.onActivityCreated(arg0);
 
-        if (isSlideUp == true) {
-            getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimationSlideUp;
-        } else {
-            getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimationSlideDown;
-        }
+        //if (isSlideUp == true) {
+        //    dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationSlideUp;
+        //} else {
+        //    dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimationSlideDown;
+        //}
     }
 
     /**
-     *  Custom dialog show
+     * Custom dialog show
      */
     @Override
     public void onResume() {
@@ -233,16 +358,12 @@ public class DialogUtils extends DialogFragment {
 
             if (tv != null) {
                 tv.setTextColor(getResources().getColor(titleColor.intValue()));
+                if (isCenter) {
+                    tv.setGravity(Gravity.CENTER);
+                }
             }
         }
     }
 
-    /**
-     * Callback interface
-     */
-    public static abstract class DialogListener {
-        public abstract void onPositiveButton(DialogInterface dialogInterface);
 
-        public abstract void onNegativeButton(DialogInterface dialogInterface);
-    }
 }

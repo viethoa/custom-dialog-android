@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_primary_color">#F44336</color>
+    <color name="app_primary_color_dark">#c31c13</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="app_green_color">#43A047</color>
+    <color name="app_orange_color">#ffef9c01</color>
+
+    <color name="dialog_bg_color">#FFFFFF</color>
+    <color name="dialog_bg_color_dark">#E0E0E0</color>
+    <color name="dialog_bg_border">#BDBDBD</color>
+
+    <color name="text_color_bright">#FFFFFF</color>
+    <color name="text_color_dark">#616161</color>
+
+</resources>
