@@ -19,7 +19,7 @@ How to use
     }
 
     dependencies {
-        compile 'com.github.viethoa:customdialogs:2.0.0-SNAPSHOT'
+        compile 'com.github.viethoa:customdialogs:3.0.0'
     }
 
     **Or**:
